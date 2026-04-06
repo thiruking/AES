@@ -10,19 +10,31 @@ AES operates on a 4 × 4 column-major order array of bytes, termed the state
 # PROGRAM:
 
 ```C
-#include <stdio.h>
-#include <string.h> 
-void xorCrypt(char *in, char *key) { 
-for (int i = 0; in[i]; i++) in[i] ^= key[i % strlen(key)]; 
-} 
-int main() { 
-char msg[] = "THIRUMALAI", key[] = "secretkey"; 
-printf("Original: %s\n", msg); 
-xorCrypt(msg, key); 
-printf("Encrypted: %s\n", msg); 
-xorCrypt(msg, key); 
-printf("Decrypted: %s\n", msg); 
-return 0; 
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    char m[] = "THIRUMALAI";
+    char k[] = "secretkey";
+
+    int n = strlen(m), kl = strlen(k);
+
+    printf("Original: %s\n", m);
+
+    // Encrypt
+    for(int i=0;i<n;i++)
+        m[i] ^= k[i % kl];
+
+    printf("Encrypted: %s\n", m);
+
+    // Decrypt
+    for(int i=0;i<n;i++)
+        m[i] ^= k[i % kl];
+
+    printf("Decrypted: %s\n", m);
+
+    return 0;
 }
 ```
 
